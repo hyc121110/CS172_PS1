@@ -1,3 +1,5 @@
-TODO 
+How to run the program:
 
-// Include instructions on how to run your program here. 
+Open visual studio code or other IDEs and make sure the nltk package is installed in your machine. Press Ctrl+F5 on VScode (or Run on your IDE) to run the code. Follow the instruction from the terminal.
+
+If you don't have visual studio code, open terminal/powershell and type "python .\submission.py" and press enter. Once again make sure the nltk package is installed in your machine or else the code will fail to run.
