@@ -19,9 +19,9 @@ def createIndex(directory):
   directory = "\\" + directory
   with open('stoplist.txt') as f1:
     stop_words = f1.read()
-    # different directories
+    # define new path
     new_path = path + directory
-    # different files in same directory
+    # process each files in same directory
     for fn in os.listdir(new_path):
       new_fn = new_path + "\\" + fn
       # open file in directory
@@ -36,6 +36,7 @@ def createIndex(directory):
         for word in words:
           # one liner to remove punctuation and lowercase each token            
           word = word.translate(str.maketrans('', '', string.punctuation)).lower()
+          # check if word is a stop word
           if word not in stop_words:
             num_terms += 1
             # lemmatize word
@@ -46,7 +47,6 @@ def createIndex(directory):
               # word has appeared before, just increment counters
               word_freq[word] += 1
               word_freq_in_cur_doc[word] += 1
-              #terms.append([word])
             else:
               # initialize values of counters 
               word_freq[word] = 1
