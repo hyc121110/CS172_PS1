@@ -4,12 +4,11 @@
 import os
 import string
 import math
-from nltk.stem import WordNetLemmatizer
+from nltk.stem import PorterStemmer
 from collections import defaultdict
 
 path = os.getcwd()
-#directories = ["\\dataset1", "\\dataset2"]
-lemmatizer = WordNetLemmatizer()
+ps = PorterStemmer()
 
 word_freq = defaultdict(int) # count for terms in a document
 posting_index = dict() # dictionary with key "term" and value (# docs in which term occurs, [posting-list])
@@ -39,8 +38,8 @@ def createIndex(directory):
           # check if word is a stop word
           if word not in stop_words:
             num_terms += 1
-            # lemmatize word
-            word = lemmatizer.lemmatize(word)
+            # apply stemming
+            word = ps.stem(word)
             docID_freq[word] += 1
 
             if word in word_freq:
@@ -71,8 +70,8 @@ def termLookup(query):
 
   # one liner to remove punctuation and lowercase each token            
   word = query.translate(str.maketrans('', '', string.punctuation)).lower()
-  # lemmatize word
-  word = lemmatizer.lemmatize(word)
+  # apply stemming
+  word = ps.stem(word)
 
   # check if query in posting_index
   if word in posting_index.keys():
@@ -97,7 +96,7 @@ def termLookup(query):
       tfidf = tf * idf
       print("TF-IDF for", doc, "is", tfidf)
   else:
-    # print "No Match"
+    # no match
     print("No Match")
 
 # main
